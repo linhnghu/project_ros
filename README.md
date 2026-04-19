@@ -10,7 +10,7 @@ cd ~/ros2_ws/src
 ```
 2. Clone package:
 ```
-git clone [URL_REPO_CỦA_BẠN]
+git clone gh repo clone linhnghu/project_ros
 ```
 3. Cài đặt các thư viện phụ thuộc:
 
