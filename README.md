@@ -14,23 +14,18 @@ git clone https://github.com/linhnghu/project_ros
 mv ~/ros2_ws/src/project_ros/my_robot_urdf ~/ros2_ws/src/
 rm -rf project_ros
 ```
-3. Cài đặt các thư viện phụ thuộc:
+3. Build package:
 
 ```
 cd ~/ros2_ws
-rosdep install --from-paths src --ignore-src -r -y
-```
-4. Build package:
-
-```
 colcon build --packages-select my_robot_urdf --symlink-install
 ```
-5. Source môi trường:
+4. Source môi trường:
 
 ```
 source install/setup.bash
 ```
-6. Chạy file launch
+5. Chạy file launch
 
 ```
 ros2 launch my_robot_urdf launch.py
