@@ -4,9 +4,9 @@
 Cài đặt
 Dự án này là một package ROS 2 độc lập. Bạn có thể dễ dàng thêm nó vào workspace hiện tại của mình.
 
-1. Tạo workspace (nếu bạn chưa có sẵn):
+1. Tạo workspace:
 
-Bash```
+```bash
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws/src
 2. Clone package:
