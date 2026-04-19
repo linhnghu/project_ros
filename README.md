@@ -11,7 +11,7 @@ cd ~/ros2_ws/src
 2. Clone package:
 ```
 git clone https://github.com/linhnghu/project_ros
-v ~/ros2_ws/src/project_ros/my_robot_urdf ~/ros2_ws/src/
+mv ~/ros2_ws/src/project_ros/my_robot_urdf ~/ros2_ws/src/
 rm -rf project_ros
 ```
 3. Cài đặt các thư viện phụ thuộc:
