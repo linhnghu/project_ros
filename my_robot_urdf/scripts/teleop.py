@@ -25,6 +25,8 @@ class CustomTeleop(Node):
         o : Quay phải tại chỗ
         j : Tiến + quay trái
         l : Tiến + quay phải
+        J : Đi ngang sang trái
+        L : Đi ngang sang phải
         k : Dừng
         q : Thoát
         """)
@@ -39,12 +41,20 @@ class CustomTeleop(Node):
             termios.tcsetattr(fd, termios.TCSADRAIN, old)
         return key
 
+    def stop_robot(self):
+        """Gửi lệnh vận tốc 0 để dừng robot an toàn."""
+        msg = Twist()
+        msg.linear.x = 0.0
+        msg.linear.y = 0.0
+        msg.angular.z = 0.0
+        self.pub.publish(msg)
+
     def run(self):
         while True:
             key = self.get_key()
             msg = Twist()
 
-            if key == 'i':                        # Tiến thẳng
+            if key == 'i':                         # Tiến thẳng
                 msg.linear.x  = self.linear_speed
                 msg.angular.z = 0.0
 
@@ -71,16 +81,35 @@ class CustomTeleop(Node):
             elif key == 'k':                       # Dừng
                 msg.linear.x  = 0.0
                 msg.angular.z = 0.0
+                
+            elif key == 'J':                       # Đi ngang sang trái
+                msg.linear.y  = self.linear_speed
+                msg.angular.z = 0.0
 
+            elif key == 'L':                       # Đi ngang sang phải
+                msg.linear.y  = -self.linear_speed
+                msg.angular.z = 0.0
+                
             elif key == 'q':                       # Thoát
+                self.stop_robot()
                 break
+            
+            # Gửi lệnh điều khiển nếu không nhấn thoát
+            if key != 'q':
+                self.pub.publish(msg)
 
-            self.pub.publish(msg)
-
-def main():
-    rclpy.init()
+def main(args=None):
+    rclpy.init(args=args)
     node = CustomTeleop()
-    node.run()
+    
+    try:
+        node.run()
+    except KeyboardInterrupt:
+        # Bắt sự kiện khi người dùng nhấn Ctrl+C
+        node.stop_robot()
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
