@@ -18,7 +18,7 @@ endif()
 # 1. Cài đặt các thư mục dữ liệu (Đưa vào mục share)
 # Đã thêm thư mục 'rviz' vào danh sách này
 install(
-  DIRECTORY launch meshes urdf src include scripts config my_robot_urdf
+  DIRECTORY launch meshes urdf scripts config my_robot_urdf
   DESTINATION share/${PROJECT_NAME}
 )
 
